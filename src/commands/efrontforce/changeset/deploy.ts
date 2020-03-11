@@ -4,6 +4,7 @@ import * as path from "path";
 import * as fs from "fs";
 import * as rimraf from "rimraf";
 import * as chalk from "chalk";
+import * as AdmZip from "adm-zip";
 import { exec } from "child-process-promise";
 
 export default class Org extends SfdxCommand {
@@ -34,18 +35,16 @@ export default class Org extends SfdxCommand {
   `,
     `
   ⚠️  ${chalk.magentaBright(
-    "[EN] Warning: if there is a folder in your project with the same name as the change set, it will be overwritten."
+    "[EN] Warning: if a sub-folder 'temp' exists in the folder where you run the command, it will be overwritten."
   )}
   ⚠️  ${chalk.magentaBright(
-    "[FR] Attention : si il y un dossier dans votre projet qui porte le même nom que le change set, il sera ecrasé"
-    )}
+    "[FR] Attention : si un sous-dossier 'temp' existe dans le dossier de lancement de la commande, il sera ecrasé"
+  )}
   `
   ];
 
-  public static args = [{ name: "file" }];
-
+  // supported flags
   protected static flagsConfig = {
-    // flag with a value (-n, --name=VALUE)
     name: flags.string({
       required: true,
       char: "n",
@@ -78,23 +77,25 @@ export default class Org extends SfdxCommand {
   protected static supportsDevhubUsername = false;
 
   // Set this to true if your command requires a project workspace; 'requiresProject' is false by default
-  protected static requiresProject = true;
+  protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
+    const TEMP_FOLDER = "temp";
     const changeName = this.flags.name;
     const sourceOrg = this.flags.source;
     const targetOrg = this.flags.target;
     const isCheckOnly = this.flags.checkonly;
     const doPersist = this.flags.persist;
 
-    const retrieveChangeSetCommand = `sfdx force:source:retrieve -n "${changeName}" -u ${sourceOrg}`;
+    // retrieve command
+    const retrieveChangeSetCommand = `sfdx force:mdapi:retrieve -p "${changeName}" -u ${sourceOrg} -r temp`;
+    // deploy command
+    const deployChangeSetCommand = `sfdx force:mdapi:deploy ${
+      isCheckOnly ? "-c" : ""
+    } -d "${TEMP_FOLDER}/${changeName}" -u ${targetOrg} -w -1`;
 
     // clean of existing folder
-    await rimraf.sync(changeName);
-
-    const deployChangeSetCommand = `sfdx force:source:deploy ${
-      isCheckOnly ? "-c" : ""
-    } -p "${changeName}" -u ${targetOrg}`;
+    await rimraf.sync(TEMP_FOLDER);
 
     this.ux.startSpinner(
       "⬇️  " +
@@ -116,17 +117,26 @@ export default class Org extends SfdxCommand {
       return error;
     }
 
+    // extract the zip
+    const zip = new AdmZip(TEMP_FOLDER + "/unpackaged.zip");
+    zip.extractAllTo(TEMP_FOLDER, true);
+    await fs.unlinkSync(TEMP_FOLDER + "/unpackaged.zip");
+
     this.ux.stopSpinner("✔️");
     this.ux.log(
-      chalk.grey(`================ Content of the change set ===================`)
+      chalk.grey(
+        `================ Content of the change set ===================`
+      )
     );
 
-    listRecDir(changeName, filePath => {
+    listRecDir(TEMP_FOLDER + "/" + changeName, filePath => {
       this.ux.log(chalk.grey(filePath));
     });
 
     this.ux.log(
-      chalk.grey(`==============================================================`)
+      chalk.grey(
+        `==============================================================`
+      )
     );
 
     this.ux.startSpinner(
@@ -154,7 +164,7 @@ export default class Org extends SfdxCommand {
 
     if (!doPersist) {
       // clean folder
-      await rimraf.sync(changeName);
+      await rimraf.sync(TEMP_FOLDER);
     }
 
     // Return an object to be displayed with --json

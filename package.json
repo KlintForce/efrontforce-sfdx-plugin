@@ -10,6 +10,7 @@
     "@oclif/errors": "^1",
     "@salesforce/command": "^2",
     "@salesforce/core": "^2",
+    "adm-zip": "^0.4.14",
     "chalk": "^3.0.0",
     "child-process-promise": "^2.2.1",
     "tslib": "^1"
