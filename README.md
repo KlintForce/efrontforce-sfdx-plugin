@@ -17,7 +17,7 @@ $ npm install -g efrontforce-sfdx-plugin
 $ sfdx COMMAND
 running command...
 $ sfdx (-v|--version|version)
-efrontforce-sfdx-plugin/1.0.0 win32-x64 node-v12.14.1
+efrontforce-sfdx-plugin/1.0.1 win32-x64 node-v12.14.1
 $ sfdx --help [COMMAND]
 USAGE
   $ sfdx COMMAND
@@ -47,8 +47,8 @@ OPTIONS
 
 EXAMPLES
   $ sfdx efrontforce:changeset:deploy -s MyOrgSource -t MyOrgTarget -n "MyChangeSet"
-     [EN] This command will deploy your change set MyChangeSet du MyOrgSource vers MyOrgTarget
-     [FR] Cette commande va déployer votre change set MyChangeSet from MyOrgSource to MyOrgTarget
+     [EN] This command will deploy your change set MyChangeSet from MyOrgSource to MyOrgTarget
+     [FR] Cette commande va déployer votre change set MyChangeSet du MyOrgSource vers MyOrgTarget
   
   $ sfdx efrontforce:changeset:deploy -s MyOrgSource -t MyOrgTarget -n "MyChangeSet" -p
      [EN] : This command will deploy the change set MyChangeSet from MyOrgSource to MyOrgTarget et le persister en 
@@ -62,7 +62,7 @@ EXAMPLES
      ⚠️  [FR] Attention : si il y un dossier dans votre projet qui porte le même nom que le change set, il sera ecrasé
 ```
 
-_See code: [lib\commands\efrontforce\changeset\deploy.js](https://github.com/benahm/efrontforce/blob/v1.0.0/lib\commands\efrontforce\changeset\deploy.js)_
+_See code: [lib\commands\efrontforce\changeset\deploy.js](https://github.com/benahm/efrontforce/blob/v1.0.1/lib\commands\efrontforce\changeset\deploy.js)_
 <!-- commandsstop -->
 * [`sfdx efrontforce:changeset:deploy -n <string> -s <string> -t <string> [-c] [-p] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-efrontforcechangesetdeploy--n-string--s-string--t-string--c--p---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 
