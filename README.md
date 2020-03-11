@@ -17,7 +17,7 @@ $ npm install -g efrontforce-sfdx-plugin
 $ sfdx COMMAND
 running command...
 $ sfdx (-v|--version|version)
-efrontforce-sfdx-plugin/0.0.0 win32-x64 node-v12.14.1
+efrontforce-sfdx-plugin/1.0.0 win32-x64 node-v12.14.1
 $ sfdx --help [COMMAND]
 USAGE
   $ sfdx COMMAND
@@ -62,7 +62,7 @@ EXAMPLES
      ⚠️  [FR] Attention : si il y un dossier dans votre projet qui porte le même nom que le change set, il sera ecrasé
 ```
 
-_See code: [lib\commands\efrontforce\changeset\deploy.js](https://github.com/benahm/efrontforce/blob/v0.0.0/lib\commands\efrontforce\changeset\deploy.js)_
+_See code: [lib\commands\efrontforce\changeset\deploy.js](https://github.com/benahm/efrontforce/blob/v1.0.0/lib\commands\efrontforce\changeset\deploy.js)_
 <!-- commandsstop -->
 * [`sfdx efrontforce:changeset:deploy -n <string> -s <string> -t <string> [-c] [-p] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-efrontforcechangesetdeploy--n-string--s-string--t-string--c--p---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 
