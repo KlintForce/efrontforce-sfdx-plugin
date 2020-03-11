@@ -11,12 +11,12 @@ export default class Org extends SfdxCommand {
     `$ sfdx efrontforce:changeset:deploy -s MyOrgSource -t MyOrgTarget -n "MyChangeSet"
   [EN] This command will deploy your change set ${chalk.cyanBright(
     "MyChangeSet"
-  )} du ${chalk.cyanBright("MyOrgSource")} vers ${chalk.cyanBright(
+  )} from ${chalk.cyanBright("MyOrgSource")} to ${chalk.cyanBright(
       "MyOrgTarget"
     )}
   [FR] Cette commande va déployer votre change set ${chalk.cyanBright(
     "MyChangeSet"
-  )} from ${chalk.cyanBright("MyOrgSource")} to ${chalk.cyanBright(
+  )} du ${chalk.cyanBright("MyOrgSource")} vers ${chalk.cyanBright(
       "MyOrgTarget"
     )}
   `,
