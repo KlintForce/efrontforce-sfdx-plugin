@@ -1,7 +1,10 @@
 efrontforce-sfdx-plugin
 ===========
 
-efrontforce plugin
+Salesforce CLI plugin by eFrontForce
+
+<p align="center"><img src =".images/efrontforce-logo.png" width="150"/></p>
+
 
 [![Version](https://img.shields.io/npm/v/efrontforce.svg)](https://npmjs.org/package/efrontforce)
 [![Downloads/week](https://img.shields.io/npm/dw/efrontforce.svg)](https://npmjs.org/package/efrontforce)
