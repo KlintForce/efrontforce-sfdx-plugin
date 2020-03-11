@@ -74,25 +74,29 @@ USAGE
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
-  -c, --checkonly                                                                   Déploiement en mode validation
-  -n, --name=name                                                                   (required) Nom du change set
-  -p, --persist                                                                     Persister le change set en locale
-  -s, --source=source                                                               (required) L'org source
-  -t, --target=target                                                               (required) L'org destination
+  -c, --checkonly                                                                   Deploy wi checkonly mode
+  -n, --name=name                                                                   (required) Name of the change set
+  -p, --persist                                                                     Persist the change set locally
+  -s, --source=source                                                               (required) Source org
+  -t, --target=target                                                               (required) Target org
   --json                                                                            format output as json
 
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
 EXAMPLES
-  $ sfdx efrontforce:changeset:deploy -s MonOrgSource -t MonOrgDestination -n "MonChangeSet"
-     Cette commande va déployer votre change set MonChangeSet du MonOrgSource vers MonOrgDestination
+  $ sfdx efrontforce:changeset:deploy -s MyOrgSource -t MyOrgTarget -n "MyChangeSet"
+     [EN] This command will deploy your change set MyChangeSet from MyOrgSource to MyOrgTarget
+     [FR] Cette commande va déployer votre change set MyChangeSet du MyOrgSource vers MyOrgTarget
   
-  $ sfdx efrontforce:changeset:deploy -s MonOrgSource -t MonOrgDestination -n "MonChangeSet" -p
-     Cette commande va déployer votre change set MonChangeSet du MonOrgSource vers MonOrgDestination et le persister en 
+  $ sfdx efrontforce:changeset:deploy -s MyOrgSource -t MyOrgTarget -n "MyChangeSet" -p
+     [EN] : This command will deploy the change set MyChangeSet from MyOrgSource to MyOrgTarget et le persister en 
+  locale
+     [FR] : Cette commande va déployer votre change set MyChangeSet du MyOrgSource vers MyOrgTarget et le persister en 
   locale
   
-  ⚠️  attention : si il y un dossier dans votre projet porte le même nom que le change set, il sera ecrasé
-```
 
-_See code: [lib\commands\efrontforce\changeset\deploy.js](https://github.com/benahm/efrontforce/blob/v0.0.0/lib\commands\efrontforce\changeset\deploy.js)_
+     ⚠️  [EN] Warning: if there is a folder in your project with the same name as the change set, it will be 
+  overwritten.
+     ⚠️  [FR] Attention : si il y un dossier dans votre projet qui porte le même nom que le change set, il sera ecrasé
+```
