@@ -8,22 +8,36 @@ import { exec } from "child-process-promise";
 
 export default class Org extends SfdxCommand {
   public static examples = [
-    `$ sfdx efrontforce:changeset:deploy -s MonOrgSource -t MonOrgDestination -n "MonChangeSet"
-  Cette commande va déployer votre change set ${chalk.cyanBright(
-    "MonChangeSet"
-  )} du ${chalk.cyanBright("MonOrgSource")} vers ${chalk.cyanBright(
-      "MonOrgDestination"
+    `$ sfdx efrontforce:changeset:deploy -s MyOrgSource -t MyOrgTarget -n "MyChangeSet"
+  [EN] This command will deploy your change set ${chalk.cyanBright(
+    "MyChangeSet"
+  )} du ${chalk.cyanBright("MyOrgSource")} vers ${chalk.cyanBright(
+      "MyOrgTarget"
+    )}
+  [FR] Cette commande va déployer votre change set ${chalk.cyanBright(
+    "MyChangeSet"
+  )} from ${chalk.cyanBright("MyOrgSource")} to ${chalk.cyanBright(
+      "MyOrgTarget"
     )}
   `,
-    `$ sfdx efrontforce:changeset:deploy -s MonOrgSource -t MonOrgDestination -n "MonChangeSet" -p
-  Cette commande va déployer votre change set ${chalk.cyanBright(
-    "MonChangeSet"
-  )} du ${chalk.cyanBright("MonOrgSource")} vers ${chalk.cyanBright(
-      "MonOrgDestination"
+    `$ sfdx efrontforce:changeset:deploy -s MyOrgSource -t MyOrgTarget -n "MyChangeSet" -p
+  [EN] : This command will deploy the change set ${chalk.cyanBright(
+    "MyChangeSet"
+  )} from ${chalk.cyanBright("MyOrgSource")} to ${chalk.cyanBright(
+      "MyOrgTarget"
+    )} et le persister en locale
+  [FR] : Cette commande va déployer votre change set ${chalk.cyanBright(
+    "MyChangeSet"
+  )} du ${chalk.cyanBright("MyOrgSource")} vers ${chalk.cyanBright(
+      "MyOrgTarget"
     )} et le persister en locale
   `,
-    `⚠️  ${chalk.magentaBright(
-      "attention : si il y un dossier dans votre projet porte le même nom que le change set, il sera ecrasé"
+    `
+  ⚠️  ${chalk.magentaBright(
+    "[EN] Warning: if there is a folder in your project with the same name as the change set, it will be overwritten."
+  )}
+  ⚠️  ${chalk.magentaBright(
+    "[FR] Attention : si il y un dossier dans votre projet qui porte le même nom que le change set, il sera ecrasé"
     )}
   `
   ];
@@ -35,25 +49,25 @@ export default class Org extends SfdxCommand {
     name: flags.string({
       required: true,
       char: "n",
-      description: "Nom du change set"
+      description: "Name of the change set"
     }),
     source: flags.string({
       required: true,
       char: "s",
-      description: "L'org source"
+      description: "Source org"
     }),
     target: flags.string({
       required: true,
       char: "t",
-      description: "L'org destination"
+      description: "Target org"
     }),
     checkonly: flags.boolean({
       char: "c",
-      description: "Déploiement en mode validation"
+      description: "Deploy wi checkonly mode"
     }),
     persist: flags.boolean({
       char: "p",
-      description: "Persister le change set en locale"
+      description: "Persist the change set locally"
     })
   };
 
@@ -84,11 +98,11 @@ export default class Org extends SfdxCommand {
 
     this.ux.startSpinner(
       "⬇️  " +
-        chalk.yellowBright("Récupération du Change Set") +
+        chalk.yellowBright("Retrieving the Change Set") +
         " " +
         chalk.cyanBright(changeName) +
         " " +
-        chalk.yellowBright("depuis") +
+        chalk.yellowBright("from") +
         " " +
         chalk.cyanBright(sourceOrg)
     );
@@ -104,7 +118,7 @@ export default class Org extends SfdxCommand {
 
     this.ux.stopSpinner("✔️");
     this.ux.log(
-      chalk.grey(`================ Contenu du change set ===================`)
+      chalk.grey(`================ Content of the change set ===================`)
     );
 
     listRecDir(changeName, filePath => {
@@ -112,16 +126,16 @@ export default class Org extends SfdxCommand {
     });
 
     this.ux.log(
-      chalk.grey(`==========================================================`)
+      chalk.grey(`==============================================================`)
     );
 
     this.ux.startSpinner(
       "⬆️  " +
-        chalk.yellowBright("Déploiement du Change Set") +
+        chalk.yellowBright("Deploying the Change Set") +
         " " +
         chalk.cyanBright(changeName) +
         " " +
-        chalk.yellowBright("vers") +
+        chalk.yellowBright("to") +
         " " +
         chalk.cyanBright(sourceOrg)
     );

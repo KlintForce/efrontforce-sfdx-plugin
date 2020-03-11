@@ -1,6 +1,6 @@
 {
-  "name": "efrontforce",
-  "description": "efrontforce plugin",
+  "name": "efrontforce-sfdx-plugin",
+  "description": "efrontforce sfdx plugin",
   "version": "0.0.0",
   "author": "benahm @benahm",
   "bugs": "https://github.com/benahm/efrontforce/issues",
