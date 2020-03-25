@@ -147,7 +147,7 @@ export default class Org extends SfdxCommand {
         " " +
         chalk.yellowBright("to") +
         " " +
-        chalk.cyanBright(sourceOrg)
+        chalk.cyanBright(targetOrg)
     );
 
     try {
